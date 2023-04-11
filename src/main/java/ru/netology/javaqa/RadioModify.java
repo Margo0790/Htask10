@@ -1,8 +1,23 @@
 package ru.netology.javaqa;
 
-public class Radio {
+public class RadioModify {
+    private int stationQuantity = 10;
     private int currentStation;
     private int currentVolume;
+
+    public RadioModify() {
+    }
+
+    public RadioModify(int stationQuantity) {
+        this.stationQuantity = stationQuantity;
+        this.currentStation = 0;
+        this.currentVolume = 0;
+    }
+
+    public int getStationQuantity() {
+
+        return stationQuantity;
+    }
 
     public int getCurrentStation() {
 
@@ -10,17 +25,13 @@ public class Radio {
     }
 
     public void setCurrentStation(int station) {
-        if (station < 0) {
-            return;
+        if (station >= 0 && station < stationQuantity) {
+            this.currentStation = station;
         }
-        if (station > 9) {
-            return;
-        }
-        currentStation = station;
     }
 
     public void nextStation() {
-        if (currentStation == 9) {
+        if (currentStation == stationQuantity - 1) {
             currentStation = 0;
         } else {
             currentStation++;
@@ -29,7 +40,7 @@ public class Radio {
 
     public void prevStation() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = stationQuantity - 1;
         } else {
             currentStation--;
         }
@@ -42,32 +53,21 @@ public class Radio {
 
     public void setCurrentVolume(int volume) {
 
-        if (volume < 0) {
-            return;
-        }
-
-        if (volume > 100) {
+        if (volume < 0 || volume > 100) {
             return;
         }
         currentVolume = volume;
-
     }
 
     public void increaseVolume() {
-        if (currentVolume == 100) {
-            currentVolume = 100;
-        } else {
+        if (currentVolume < 100) {
             currentVolume++;
-
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume == 0) {
-            currentVolume = 0;
-        } else {
+        if (currentVolume > 0) {
             currentVolume--;
-
         }
     }
 }
